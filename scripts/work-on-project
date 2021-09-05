@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+
+# Usage: work-on-project <ABS_PROJECT_PATH>
+#
+# Example: work-on-project /home/c/asmr-systems/my-siq-module
+#
+# This script is used to ssh into an existing Vagrant box (which has been
+# started using `vagrant up`) from a project directory. Before sshing into
+# the box, we share the project directory with the vm. This has the benefit
+# of allowing us to edit code on our host system while doing all our testing,
+# building, debugging, programming from within our dev environment.
+
+# get the absolute path of the current project.
+PROJECT_PATH="$1"
+
+# get project name (also folder share name) from project path.
+PROJECT_NAME=$(echo "$PROJECT_PATH" | xargs basename)
+
+# use this dev box name.
+DEV_BOX_NAME="asmr-dev"
+
+# Share the provided host directory with the guest "on the fly". This shared
+# folder will not be persisted across a vm restart due to the --transient flag.
+# See  https://stackoverflow.com/a/34701049.
+# Note: since vagrant doesn't provide builtin support for manipulating folder
+# shares on boxes, we are using the VirtualBox CLI directly (VBoxManage).
+VBoxManage sharefolder add $DEV_BOX_NAME  \
+           --name  $PROJECT_NAME          \
+           --hostpath $PROJECT_PATH       \
+           --transient
+
+# ssh into the vagrant box, mount the project directory, and cd into it.
+# See: https://www.virtualbox.org/manual/ch04.html#sharedfolders
+vagrant ssh -c "'
+sudo mount -t vboxsf -o uid=1000,gid=1000 $PROJECT_NAME  /projects/$PROJECT_NAME &&
+cd /projects/$PROJECT_NAME  && 
+bash
+'"
