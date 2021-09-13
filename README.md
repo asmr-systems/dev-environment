@@ -18,10 +18,38 @@ vagrant up   # could take 10 minutes while VM is built, you can eat a snack or s
 vagrant ssh  # log into the VM
 ```
 
+### JTAG + Devboard Setup
+* make sure that the board itself is powered (plugged into wall wart or powered usb)! must have enough current (otherwise LEDs won't light)
+* J-Link Mini can be plugged into the powered USB port, but also needs enough current (otherwise its LED will blink rapidly)
+
+### JLinkExe (L-Link Commander)
+To connect to the SAMD21 via J-Link Commander,
+``` shell
+vagrant ssh
+> JLinkExe
+JLink> connect
+device> ATSAMD21G18  # this is the name of our cpu.
+TIF> S               # select 'S' (SWD) as the target interface.
+Speed>               # default (4000kHz) seems fine.
+```
+
+## Ideas
+* use `OpenOCD` instead of `jlink` for flashing (open source and configurable [see this](https://hackaday.io/project/160187-samd-v2-fusee-payload-injector/log/150781-openocd-flash-script))
+* use `UF2` bootloader (supports Mass Storage Bootloader (for end-users who want to update firmware) AND BOSSA Bootloader for programmatically flashing)
+* use `BOSSA` for updating firmware in development mode. (see [this](https://learn.adafruit.com/adafruit-feather-m0-express-designed-for-circuit-python-circuitpython/uf2-bootloader-details#using-the-bossa-bootloader-2929760-21))
+* for final product, have a button which when double-tapped, puts the device in BOOTLOADER mode (see [AdaFruit UF2 SAMD bootloader](https://github.com/adafruit/uf2-samdx1/blob/530fedf5dab77a54e272f0ea1ad3ac0453241f8f/inc/uf2.h#L244) and [Winterbloom's same thing](https://github.com/wntrblm/libwinter/blob/main/src/samd/wntr_bootloader.c#L23))
+
 ## BreadCrumbs [WIP]
-* leaving off -- can't connect to SAMD21 via JLink yet. I'm trying via JLinkExe, `connect`....
 * [turning off protection](https://roamingthings.de/posts/use-j-link-to-change-the-boot-loader-protection-of-a-sam-d21/)
 * [programming SAMD via JLink](https://hackaday.io/page/5997-programming-a-samd-bootloader-using-jlink-linux)
+* [openocd flash script](https://hackaday.io/project/160187-samd-v2-fusee-payload-injector/log/150781-openocd-flash-script)
+
+## Next Steps
+1. research OpenOCD + CMSIS
+2. write tools/process for:
+   a. bootloading (writing a blank or possibly bricked device with a bootloader (UF2))
+   b. development programming (using BOSSA against UF2 bootloader)
+   c. end-user firmware update via doubletapped button and usb.
 
 ## Overview
 Development Hardware:

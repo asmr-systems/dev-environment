@@ -2,7 +2,9 @@
 
 sudo apt-get update && sudo apt-get upgrade -y
 
-sudo apt-get install -y curl
+sudo apt-get install -y \
+     curl \
+     usbutils
 
 echo "Installing JLinkExe (SEGGER Toochain)..."
 SEGGER_TOOLS_URL="https://www.segger.com/downloads/jlink/JLink_Linux_x86_64.deb"
