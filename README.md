@@ -44,8 +44,19 @@ Speed>               # default (4000kHz) seems fine.
 * [programming SAMD via JLink](https://hackaday.io/page/5997-programming-a-samd-bootloader-using-jlink-linux)
 * [openocd flash script](https://hackaday.io/project/160187-samd-v2-fusee-payload-injector/log/150781-openocd-flash-script)
 
+!!!!! NOTE: "For CMSIS stuff you need to download ASF (still available as a standalone ZIP, I believe), disregard all the drivers stuff and just take header files. That will basically constitute all that Atmel has for CMSIS."
+see [this](https://www.avrfreaks.net/comment/1565961#comment-1565961)
+look at AdaFruit's update from [Atmel Start repo](https://github.com/adafruit/asf4/blob/master/tools/update_from_atmel_start.py)
+ALSO LLOOK AT [this](https://omzlo.com/articles/programming-samd21-using-atmel-ice-with-openocd)
+
+## Comparison of chips
+[Atmel MCUs](https://www.microchip.com/en-us/products/microcontrollers-and-microprocessors/32-bit-mcus/sam-32-bit-mcus)
+
 ## Next Steps
-1. research OpenOCD + CMSIS
+0. Write test program to flash onto mcu (blink led in pattern)
+   a. compile
+   b. flash
+1. research OpenOCD + CMSIS + ASF
 2. write tools/process for:
    a. bootloading (writing a blank or possibly bricked device with a bootloader (UF2))
    b. development programming (using BOSSA against UF2 bootloader)

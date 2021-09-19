@@ -5,13 +5,16 @@ Vagrant.configure("2") do |config|
   config.vm.box = "debian/bullseye64"
 
   # set hostname of vm
-  config.vm.hostname = "asmr-dev.local"
+  config.vm.hostname = "asmr.dev.local"
+
+  # define vagrant machine name
+  config.vm.define "asmr.dev"
 
   # use virtualbox
   config.vm.provider "virtualbox" do |v|
 
     # set name
-    v.name = "asmr-dev"
+    v.name = "asmr.dev"
 
     # run headless
     v.gui = false
