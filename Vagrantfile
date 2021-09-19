@@ -14,7 +14,7 @@ Vagrant.configure("2") do |config|
   config.vm.provider "virtualbox" do |v|
 
     # set name
-    v.name = "asmr-dev"
+    v.name = "asmr.dev"
 
     # run headless
     v.gui = false
