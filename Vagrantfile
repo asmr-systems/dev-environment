@@ -37,5 +37,6 @@ Vagrant.configure("2") do |config|
 
   # provision vm
   config.vm.provision :shell, path: "scripts/provision/0-install-dependencies.sh"
+  config.vm.provision :shell, path: "scripts/provision/1-configure-env.sh"
   #config.vm.provision :shell, path: "1_clone-code.sh", args: "#{ENV['USER_GITHUB_URL']}", privileged: false
 end
