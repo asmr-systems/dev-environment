@@ -10,6 +10,7 @@ DEPS+=("openocd")
 DEPS+=("gcc-arm-none-eabi")
 DEPS+=("python3-venv")                 # python 3 virtual environment.
 DEPS+=("python3-pip")                  # python 3 pip.
+DEPS+=("ntp")                          # Network Time Protocol (time sync VM)
 
 sudo apt-get update && sudo apt-get upgrade -y
 
