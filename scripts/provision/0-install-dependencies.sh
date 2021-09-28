@@ -7,10 +7,12 @@ DEPS+=("unzip")
 DEPS+=("usbutils")
 DEPS+=("emacs")
 DEPS+=("openocd")
-DEPS+=("gcc-arm-none-eabi")
+DEPS+=("gcc-arm-none-eabi")            # ARM Embedded GCC.
+DEPS+=("gdb-multiarch")                # GNU Debugger (multi arch support).
+DEPS+=("bossa-cli")                    # Atmel SAM ARM mcu flash programmer.
 DEPS+=("python3-venv")                 # python 3 virtual environment.
 DEPS+=("python3-pip")                  # python 3 pip.
-DEPS+=("ntp")                          # Network Time Protocol (time sync VM)
+DEPS+=("ntp")                          # Network Time Protocol (time sync VM).
 
 sudo apt-get update && sudo apt-get upgrade -y
 
