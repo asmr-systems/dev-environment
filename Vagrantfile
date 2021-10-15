@@ -41,8 +41,13 @@ Vagrant.configure("2") do |config|
 
   end
 
-  # provision vm
+  #:::: Provision VM
+  #:::::::::::::::::
+
   config.vm.provision :shell, path: "scripts/provision/0-install-dependencies.sh"
   config.vm.provision :shell, path: "scripts/provision/1-configure-env.sh"
-  #config.vm.provision :shell, path: "1_clone-code.sh", args: "#{ENV['USER_GITHUB_URL']}", privileged: false
+
+  config.vm.provision :file, source: "resources/ASMR_DEV_ENV", destination: "/tmp/.ASMR_DEV_ENV"
+  config.vm.provision :shell, inline: "mv /tmp/.ASMR_DEV_ENV /.ASMR_DEV_ENV"
+
 end
