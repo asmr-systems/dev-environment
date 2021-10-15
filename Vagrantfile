@@ -32,11 +32,11 @@ Vagrant.configure("2") do |config|
 
     # enable serial
     # see https://docs.oracle.com/en/virtualization/virtualbox/6.0/user/vboxmanage-modifyvm.html
-    v.customize ["modifyvm", :id, "--uartmode1", "/dev/ttyACM0"]
+    # v.customize ["modifyvm", :id, "--uartmode1", "/dev/ttyACM0"]
 
     # enumerate usb devices to capture
     v.customize ['usbfilter', 'add', '0', '--target', :id, '--name', 'SEGGER J-Link PLUS', '--vendorid', '0x1366', '--productid', '0x0101']
-    v.customize ['usbfilter', 'add', '0', '--target', :id, '--name', 'ASMR R&D', '--vendorid', '0x1209', '--productid', '0x0001']
+    #v.customize ['usbfilter', 'add', '0', '--target', :id, '--name', 'ASMR R&D', '--vendorid', '0x1209', '--productid', '0x0001']
     # v.customize ['usbfilter', 'add', '0', '--target', :id, '--name', 'RedBoard Turbo Board', '--vendorid', '0x1b4f', '--productid', '0x0015']
 
   end

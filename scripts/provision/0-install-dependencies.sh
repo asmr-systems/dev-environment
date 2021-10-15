@@ -7,6 +7,7 @@ DEPS+=("unzip")
 DEPS+=("usbutils")
 DEPS+=("emacs")
 DEPS+=("openocd")
+DEPS+=("tree")                         # tree. nuff sed.
 DEPS+=("gcc-arm-none-eabi")            # ARM Embedded GCC.
 DEPS+=("gdb-multiarch")                # GNU Debugger (multi arch support).
 DEPS+=("bossa-cli")                    # Atmel SAM ARM mcu flash programmer.
@@ -19,7 +20,7 @@ sudo apt-get update && sudo apt-get upgrade -y
 sudo apt-get install -y "${DEPS[@]}"
 
 
-### JLink ###
+#:::: SEGGER JLink
 if [ ! -f "/usr/bin/JLinkExe" ]
 then
   echo "Installing JLinkExe (SEGGER Toochain)..."
@@ -34,5 +35,10 @@ else
   echo "JLink (SEGGER Toolchain) already installed."
 fi
 
-### ASMR Toolkit ###
+
+#:::: ASMR Toolkit
 pip install git+git://github.com/asmr-systems/toolkit@main
+
+
+#:::: Flit (Python3 Packaging Tool)
+python3 -m pip install flit
